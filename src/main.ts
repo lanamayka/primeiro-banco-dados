@@ -35,7 +35,6 @@ app.post('/usuario', async (req, res) => {
 app.get('/listarUsuarios', async (req, res)=>{
  try {
     const usuarios = await firestore.getDocs(firestore.collection(db,'usuarios'))
-
     const usuariosLista = usuarios.docs.map((doc)=>({
         id: doc.id,
         ...doc.data(),
@@ -65,6 +64,19 @@ try {
 }
 })
 
+app.delete('/deletarUsuario/:id', async (req, res) =>{
+    const id = req.params.id
+
+    try {
+        await firestore.deleteDoc(firestore.doc(db, 'usuarios',id))
+
+        res.send('Usario deletado com sucesso!')
+    } catch (e) {
+        console.log('Erro ao deletar usuario' +e)
+
+        res.status(500).send('Erro ao deletar usuario:' +e)
+    }
+})
 
 app.listen(3000, function(){
     console.log("servidor rodando na porta http://localhost:3000")
