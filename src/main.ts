@@ -49,13 +49,13 @@ app.get('/listarFormulario', async (req, res)=>{
     
     res.send(formularoLista);
  } catch (e) {
-    console.log("Erro ao listar formulario:" + e)
+    console.log("Erro ao listar formulário:" + e)
 
-    res.status(500).send("Erro ao listar formulario" + e)
+    res.status(500).send("Erro ao listar formulário" + e)
  }
 })
 
-app.put('/atualizarformulario/:id', async(req, res)=> {
+app.put('/atualizarFormulario/:id', async(req, res)=> {
 const id = req.params.id
 const nome = req.body.nome
 
@@ -63,25 +63,25 @@ try {
     await firestore.updateDoc(firestore.doc(db,'formulario', id), {
        nome: nome, 
     })
-    res.send('formulario Atualizado com sucesso!')
+    res.send('formulário Atualizado com sucesso!')
 } catch (e) {
-    console.log('Erro ao atualizar formulairo' + e )
+    console.log('Erro ao atualizar formuláiro' + e )
 
-    res.status(500).send('Erro ao atualizar formulario:' + e)
+    res.status(500).send('Erro ao atualizar formulário:' + e)
 }
 })
 
-app.delete('/deletarformulario/:id', async (req, res) =>{
+app.delete('/deletarFormulario/:id', async (req, res) =>{
     const id = req.params.id
 
     try {
         await firestore.deleteDoc(firestore.doc(db, 'formulario',id))
 
-        res.send('formulario deletado com sucesso!')
+        res.send('formulário deletado com sucesso!')
     } catch (e) {
-        console.log('Erro ao deletar formulario' +e)
+        console.log('Erro ao deletar formulário' +e)
 
-        res.status(500).send('Erro ao deletar formulario:' +e)
+        res.status(500).send('Erro ao deletar formulário:' +e)
     }
 })
 
